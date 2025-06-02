@@ -12,7 +12,6 @@ module test_full_adder;
         $display("A B Cin | Sum Cout");
         $monitor("%b %b  %b   |  %b   %b", a, b, cin, sum, cout);
 
-        // Test all input combinations
         a = 0; b = 0; cin = 0; #10;
         a = 0; b = 0; cin = 1; #10;
         a = 0; b = 1; cin = 0; #10;
