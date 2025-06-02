@@ -1,0 +1,16 @@
+module full_adder_structural (
+    input wire a,
+    input wire b,
+    input wire cin,
+    output wire sum,
+    output wire cout
+);
+
+    wire w1, w2, w3, w4, w5;
+
+    // XOR gates for sum
+    xor (w1, a, b);
+    xor (sum, w1, cin);
+
+    // AND and OR gates for carry
+    and (w2,
