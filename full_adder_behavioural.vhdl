@@ -7,7 +7,6 @@ module full_adder_behavioral (
 );
 
     always @ (a or b or cin) begin
-        // Behavioral description
         case ({a, b, cin})
             3'b000: begin sum = 0; cout = 0; end
             3'b001: begin sum = 1; cout = 0; end
