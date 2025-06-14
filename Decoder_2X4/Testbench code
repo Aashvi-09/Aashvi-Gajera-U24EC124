@@ -1,0 +1,35 @@
+// Code your testbench here
+// or browse Examples
+module decoder_testbench();
+  reg x0, x1;
+  wire y0,y1,y2,y3;
+  
+  decoder_dataflow uut (
+    .x0(x0),
+    .x1(x1),
+    .y0(y0),
+    .y1(y1),
+    .y2(y2),
+    .y3(y3)
+    );
+  
+  initial begin
+    
+     $dumpfile("waveform.vcd");   
+    $dumpvars(0, decoder_testbench);
+    
+    $display("Time\t x1 x0| y0 y1 y2 y3");
+    $monitor("%0t\t %b %b  |  %b %b %b %b",$time, x1, x0, y0, y1, y2, y3);
+    
+        x0 = 0; x1 = 0;#10;
+        x0 = 1; x1 = 0;#10;
+        x0 = 0; x1 = 1;#10;
+        x0 = 1; x1 = 1;#10;
+      
+
+        $finish;
+    end
+endmodule
+
+   
+  
