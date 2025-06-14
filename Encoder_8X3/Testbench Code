@@ -1,0 +1,42 @@
+// Code your testbench here
+// or browse Examples
+// Code your testbench here
+// or browse Examples
+module encoder8X3_testbench;
+  reg y0, y1, y2, y3, y4, y5, y6, y7;
+  wire x2, x1, x0;
+  
+  encoder8X3_structural uut (
+    .y0(y0),
+    .y1(y1),
+    .y2(y2),
+    .y3(y3),
+    .y4(y4),
+    .y5(y5),
+    .y6(y6),
+    .y7(y7),
+    .x2(x2),
+    .x1(x1),
+    .x0(x0)
+  );
+  
+ initial begin
+   $dumpfile("encoder8X3.vcd");
+   $dumpvars(0, encoder8X3_testbench);
+   
+   $display(" y0 y1 y2 y3 y4 y5 y6 y7 | x2 x1 x0");
+   $monitor("%b  %b  %b  %b  %b  %b  %b  %b | %b  %b  %b  ", y0, y1, y2, y3, y4, y5, y6, y7, x2, x1, x0);
+   
+   y0 = 1; y1 = 0; y2 = 0; y3 = 0; y4 = 0; y5 = 0; y6 = 0; y7 = 0; #10;
+   y0 = 0; y1 = 1; y2 = 0; y3 = 0; y4 = 0; y5 = 0; y6 = 0; y7 = 0; #10;
+   y0 = 0; y1 = 0; y2 = 1; y3 = 0; y4 = 0; y5 = 0; y6 = 0; y7 = 0; #10;
+   y0 = 0; y1 = 0; y2 = 0; y3 = 1; y4 = 0; y5 = 0; y6 = 0; y7 = 0; #10;
+   y0 = 0; y1 = 0; y2 = 0; y3 = 0; y4 = 1; y5 = 0; y6 = 0; y7 = 0; #10;
+   y0 = 0; y1 = 0; y2 = 0; y3 = 0; y4 = 0; y5 = 1; y6 = 0; y7 = 0; #10;
+   y0 = 0; y1 = 0; y2 = 0; y3 = 0; y4 = 0; y5 = 0; y6 = 1; y7 = 0; #10;
+   y0 = 0; y1 = 0; y2 = 0; y3 = 0; y4 = 0; y5 = 0; y6 = 0; y7 = 1; #10;
+   
+   $finish;
+ end 
+endmodule
+   
