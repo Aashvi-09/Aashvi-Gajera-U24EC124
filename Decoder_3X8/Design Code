@@ -1,0 +1,29 @@
+// Code your design here
+module decoder3X8_structural(
+  input wire x0,
+  input wire x1,
+  input wire x2,
+  output wire y0,
+  output wire y1,
+  output wire y2,
+  output wire y3,
+  output wire y4,
+  output wire y5,
+  output wire y6,
+  output wire y7
+);
+  
+  wire nx0, nx1, nx2;
+  not(nx0, x0);
+  not(nx1, x1);
+  not(nx2, x2);
+  and(y0, nx0, nx1, nx2);
+  and(y1, nx2, nx1, x0);
+  and(y2, nx2, x1, nx0);
+  and(y3, nx2, x1, x0);
+  and(y4, x2, nx1, nx0);
+  and(y5, x2, nx1, x0);
+  and(y6, x2, x1, nx0);
+  and(y7, x2, x1, x0);
+  
+endmodule
