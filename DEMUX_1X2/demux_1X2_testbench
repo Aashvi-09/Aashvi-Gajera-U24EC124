@@ -1,0 +1,29 @@
+// Code your testbench here
+// or browse Examples
+module demux1X2_testbench;
+  reg in, s;
+  wire Q0,Q1;
+  
+  demux_1X2_datafow uut(
+    .in(in),
+    .s(s),
+    .Q0(Q0),
+    .Q1(Q1)
+  );
+  
+  initial begin
+    $dumpfiles("demux_1X2.vcd");
+    $dumpwars(0,demux1X2_testbench);
+    
+    $display("in s | Q0 Q1");
+    $monitor("%b  %b | %b  %b", in, s, Q0, Q1);
+    
+    in = 0; s = 0; #10;
+    in = 0; s = 1; #10;
+    in = 1; s = 0; #10;
+    in = 1; s = 1; #10;
+    
+   $finish;
+  end
+endmodule
+    
