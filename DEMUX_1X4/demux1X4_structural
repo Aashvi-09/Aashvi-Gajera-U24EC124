@@ -1,0 +1,17 @@
+// Code your design here
+module demux_1X4_structural(
+  input wire in,
+  input wire s0,
+  input wire s1,
+  output reg Q0,
+  output reg Q1,
+  output reg Q2,
+  output reg Q3
+);
+  and(Q0, in, ~s0, ~s1);
+  and(Q1, in, s0, ~s1);
+  and(Q2, in, ~s0, s1);
+  and(Q3, in, s0, s1);
+
+endmodule
+  
