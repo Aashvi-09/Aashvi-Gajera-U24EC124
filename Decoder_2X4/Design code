@@ -1,0 +1,19 @@
+module decoder_dataflow(
+    input wire x0,
+    input wire x1,
+    output wire y0,
+    output wire y1,
+    output wire y2,
+    output wire y3
+);
+  
+    wire x0_bar, x1_bar;
+    assign x0_bar = ~x0;
+    assign x1_bar = ~x1;
+
+    assign y0 = x0_bar & x1_bar;  
+    assign y1 = x0     & x1_bar;  
+    assign y2 = x0_bar & x1;      
+    assign y3 = x0     & x1;      
+
+endmodule
