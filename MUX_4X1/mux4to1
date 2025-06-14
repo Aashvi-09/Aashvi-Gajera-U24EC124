@@ -1,0 +1,18 @@
+module mux_4X1_behavioral(
+  input wire i0,
+  input wire i1,
+  input wire i2,
+  input wire i3,
+  input wire s0,
+  input wire s1,
+  output reg Q
+);
+  always @(*) begin
+    case ({s1, s0})  // Combine s1 and s0 into a 2-bit vector
+      2'b00: Q = i0;
+      2'b01: Q = i1;
+      2'b10: Q = i2;
+      2'b11: Q = i3;
+    endcase
+  end
+endmodule
