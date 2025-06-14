@@ -1,0 +1,43 @@
+// Code your design here
+module priorityencoder4X2_behavioral(
+  input wire y0, y1, y2, y3,
+  output reg x1, x0, v
+);
+  always @(*)
+    begin
+      if(y3)
+        begin
+          x1 = 1;
+          x0 = 1;
+          v = 1;
+        end
+      else if(y2)
+        begin
+          x1 = 1;
+          x0 = 0;
+          v = 1;
+        end
+      else if(y1)
+        begin
+          x1 = 0;
+          x0 = 1;
+          v = 1;
+        end
+      else if(y0)
+        begin
+          x1=0;
+          x0 = 0;
+          v = 1;
+        end
+      else
+        begin
+          x0 = 0;
+          x1 = 0;
+          v = 0;
+        end
+    end
+     
+
+endmodule
+  
+  
