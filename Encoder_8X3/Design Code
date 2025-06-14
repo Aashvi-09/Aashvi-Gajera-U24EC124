@@ -1,0 +1,21 @@
+// Code your design here
+// Code your design here
+module encoder8X3_structural(
+  input wire y0,
+  input wire y1,
+  input wire y2,
+  input wire y3,
+  input wire y4,
+  input wire y5,
+  input wire y6,
+  input wire y7,
+  output wire x0,
+  output wire x1,
+  output wire x2
+);
+  or(x2, y4, y5, y6, y7);
+  or(x1, y2, y3, y6, y7);
+  or(x0, y1, y3, y5, y7);
+
+  
+endmodule
