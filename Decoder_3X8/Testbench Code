@@ -1,0 +1,39 @@
+// Code your testbench here
+// or browse Examples
+module decoder3X8_testbench;
+  reg x2, x1, x0;
+  wire y0, y1, y2, y3, y4, y5, y6, y7;
+  
+  decoder3X8_structural uut (
+    .x2(x2),
+    .x1(x1),
+    .x0(x0),
+    .y0(y0),
+    .y1(y1),
+    .y2(y2),
+    .y3(y3),
+    .y4(y4),
+    .y5(y5),
+    .y6(y6),
+    .y7(y7)
+  );
+  
+ initial begin
+   
+   $dumpfile("decoder3X8.vcd");
+   $dumpvars(0,decoder3X8_testbench);
+   $display("x2 x1 x0 | y0 y1 y2 y3 y4 y5 y6 y7");
+   $monitor("%b  %b  %b  |  %b  %b  %b  %b  %b %b  %b ", x2, x1, x0, y0, y1, y2, y3, y4, y5, y6, y7);
+   
+   x2 = 0; x1 = 0; x0 = 0; #10;
+   x2 = 0; x1 = 0; x0 = 1; #10;
+   x2 = 0; x1 = 1; x0 = 0; #10;
+   x2 = 1; x1 = 0; x0 = 0; #10; 
+   x2 = 1; x1 = 0; x0 = 1; #10;
+   x2 = 1; x1 = 1; x0 = 0; #10;
+   x2 = 1; x1 = 1; x0 = 1; #10;
+   
+   $finish;
+ end 
+endmodule
+   
