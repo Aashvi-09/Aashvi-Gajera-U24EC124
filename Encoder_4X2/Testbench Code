@@ -1,0 +1,29 @@
+// Code your testbench here
+// or browse Examples
+module encoder_testbench;
+  reg y0, y1, y2, y3;
+  wire x1, x0;
+  
+  encoder4X2_dataflow uut (
+    .y0(y0),
+    .y1(y1),
+    .y2(y2),
+    .y3(y3),
+    .x0(x0),
+    .x1(x1)
+  );
+  
+  initial begin
+    $dumpfile("encoder4X2_dataflow.vcd");
+    $dumpvars(0, encoder_testbench);
+    $display("y0 y1 y2 y3 | x1 x0");
+    $monitor("%b  %b  %b  %b  |  %b  %b", y0, y1, y2, y3, x1, x0);
+    y3 = 0; y2 = 0; y1 = 0; y0 = 1; #10;
+    y3 = 0; y2 = 0; y1 = 1; y0 = 0; #10;
+    y3 = 0; y2 = 1; y1 = 0; y0 = 0; #10;
+    y3 = 1; y2 = 0; y1 = 0; y0 = 0; #10;
+    
+    $finish;
+  end
+endmodule
+    
