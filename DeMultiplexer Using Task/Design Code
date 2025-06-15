@@ -1,0 +1,25 @@
+// Code your design here
+module demux1x4_task (
+  input wire I,
+  input wire [1:0] s,
+  output wire [3:0] Y
+);
+
+  reg [3:0] y_reg;
+  task demux_task;
+    input data;
+    input [1:0] s;
+    output [3:0] out;
+    begin
+      out = 4'b0000;
+      out[s] = data;
+    end
+  endtask
+
+  always @(*) begin
+    demux_task(I, s, y_reg);
+  end
+
+  assign Y = y_reg;
+
+endmodule
