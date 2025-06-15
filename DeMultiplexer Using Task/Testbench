@@ -1,0 +1,25 @@
+// Code your testbench here
+// or browse Examples
+module demux1x4_task_testbench;
+  reg I;
+  reg [1:0] s;
+  wire [3:0] Y;
+
+  demux1x4_task uut (
+    .I(I),
+    .s(s),
+    .Y(Y)
+  );
+
+  initial begin
+    $dumpfile("demux1x4_task.vcd");
+    $dumpvars(0, demux1x4_task_testbench);
+    $display("s   I  |  Y");
+    $monitor("%b   %b | %b", s, I, Y);
+
+    I = 1; s = 2'b00; #10;
+    I = 1; s = 2'b01; #10;
+    I = 1; s = 2'b10; #10;
+    I = 1; s = 2'b11; #10;
+  end
+endmodule
