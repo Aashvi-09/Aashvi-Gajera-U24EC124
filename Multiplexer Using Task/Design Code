@@ -1,0 +1,26 @@
+// Code your design here
+module mux4x1_task (
+  input  wire [3:0] i,     
+  input  wire [1:0] s,    
+  output reg Q   
+);
+
+  task mux_task;
+    input  [3:0] data;
+    input  [1:0] s;
+    output       o;
+    begin
+      case (s)
+        2'b00: o = data[0];
+        2'b01: o = data[1];
+        2'b10: o = data[2];
+        2'b11: o = data[3];
+        default: o = 1'bx;
+      endcase
+    end
+  endtask
+  always @(*) begin
+    mux_task(i, s, Q);
+  end
+
+endmodule
