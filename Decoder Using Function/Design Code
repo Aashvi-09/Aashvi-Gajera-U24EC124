@@ -1,0 +1,15 @@
+// Code your design here
+module decoder3X8_ft(
+  input wire [2:0]x,
+  output wire [7:0]y
+);
+  function [7:0]decod_func;
+  input [2:0]in;
+  begin
+    decod_func = 8'b00000000;
+    decod_func[in] = 1'b1;
+  end
+endfunction
+  
+  assign y = decod_func(x);
+endmodule
