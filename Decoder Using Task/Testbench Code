@@ -1,0 +1,27 @@
+// Code your testbench here
+// or browse Examples
+module decodtask_testbench;
+  reg [2:0]x;
+  wire [7:0]y;
+  decoder3X8_tk uut(
+    .x(x),
+    .y(y)
+  );
+  initial begin
+    $dumpfile("decoder3X8_tk.vcd");
+    $dumpvars(0, decodtask_testbench);
+    
+    $display("x   |   y");
+    $monitor("%b | %b", x, y);
+    
+    for(int i=0; i<8; i++)
+     begin
+        x = i;
+        #5;
+     end
+    $finish;
+  end
+endmodule
+         
+     
+    
