@@ -1,0 +1,24 @@
+// Code your design here
+module mux4x1_func(
+  input  wire [3:0] i,   
+  input  wire [1:0] s,  
+  output wire  Q  
+);
+
+  function [0:0] mux_func;
+    input [3:0] data;
+    input [1:0] s;
+    begin
+      case (s)
+        2'b00: mux_func = data[0];
+        2'b01: mux_func = data[1];
+        2'b10: mux_func = data[2];
+        2'b11: mux_func = data[3];
+        default: mux_func = 1'bx;
+      endcase
+    end
+  endfunction
+
+  assign Q = mux_func(i, s);
+
+endmodule
