@@ -1,0 +1,21 @@
+module encoder8X3_func(
+  input wire [7:0] x,
+  output wire [2:0] y
+);
+
+  function [2:0] encod_func;
+    input [7:0] in;
+    integer i;
+    begin
+      encod_func = 3'b000; 
+      for (i = 0; i < 8; i = i + 1)
+      begin
+        if (in[i])
+          encod_func = i[2:0]; 
+      end
+    end
+  endfunction
+
+  assign y = encod_func(x);
+
+endmodule
