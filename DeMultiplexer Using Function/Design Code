@@ -1,0 +1,19 @@
+// Code your design here
+module demux1x4_func (
+  input wire I,
+  input wire [1:0] s,
+  output wire [3:0] Y
+);
+
+  function [3:0] demux_func;
+    input data;
+    input [1:0] s;
+    begin
+      demux_func = 4'b0000;
+      demux_func[s] = data;
+    end
+  endfunction
+
+  assign Y = demux_func(I, s);
+
+endmodule
