@@ -1,0 +1,25 @@
+// Code your testbench here
+// or browse Examples
+module BCD_Encoder_testbench;
+  reg  [9:0] bin;
+  wire [3:0] BCD;
+
+  BCD_Encoder uut (
+    .bin(bin),
+    .BCD(BCD)
+  );
+
+  initial begin
+    $dumpfile("BCD_Encoder.vcd");
+    $dumpvars(0, BCD_Encoder_testbench);
+    
+    $display("Decimal  |  Binary");
+    for (int i = 0; i < 10; i++) begin
+      bin = 10'b0000000001 << i;
+      #5;
+      $display("%b | %b", bin, BCD);
+    end
+
+    $finish;
+  end
+endmodule
