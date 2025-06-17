@@ -1,0 +1,40 @@
+// Code your testbench here
+// or browse Examples
+module RippleCarryAdder_testbench;
+  reg [3:0]a,b;
+  reg cin;
+  wire [3:0]sum;
+  wire c4;
+
+
+ RippleCarryAdder uut(
+   .a(a),
+   .b(b),
+   .cin(cin),
+   .sum(sum),
+   .c4(c4)
+ );
+
+initial begin
+  $dumpfile("RippleCarryAdder.vcd");
+  $dumpvars(0,RippleCarryAdder_testbench);
+  
+  $display(" cin a  b  |  sum  c4");
+  $monitor("%b  %b  %b  |  %b  %b", cin, a, b, sum, c4);
+  
+  cin = 0;
+  a = 4'b0110;
+  b = 4'b1100;
+  #10
+  a = 4'b1110;
+  b = 4'b1000;
+  #10
+  a = 4'b0111;
+  b = 4'b1110;
+  #10
+  a = 4'b0010;
+  b = 4'b1001;
+  #10
+  $finish();
+end
+endmodule
