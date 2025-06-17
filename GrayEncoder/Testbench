@@ -1,0 +1,27 @@
+// Code your testbench here
+// or browse Examples
+module grayEncoder_testbench;
+  reg [3:0]bin;
+  wire [3:0]gray;
+  
+  GrayEncoder #4 uut(
+    .bin(bin),
+    .gray(gray)
+  );
+  
+  initial begin
+    $dumpfile("GrayEncoder.vcd");
+    $dumpvars(0, grayEncoder_testbench);
+    
+    $display(" b    |    g");
+    $monitor("%b    |    %b", bin, gray);
+    
+    for(int i=0; i<16; i++)
+      begin
+        bin = i;
+        #5;
+      end
+  end
+endmodule
+    
+    
