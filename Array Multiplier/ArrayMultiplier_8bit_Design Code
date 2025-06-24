@@ -1,0 +1,201 @@
+// Code your design here
+module half_adder(
+  input a,b,
+  output sum, cout
+);
+  assign sum  = a ^ b;
+  assign cout = a & b;
+endmodule
+
+module full_adder(
+  input a,b,c,
+  output Sum, Cout
+);
+  assign Sum  = a ^ b ^ c;
+  assign Cout = (a & b) | (b & c) | (c & a);
+endmodule
+
+module arrayMultiplier_8X8(
+  input [7:0]A, B,
+  output [15:0]P
+);
+  
+  wire pp00 = A[0] & B[0];
+  wire pp01 = A[1] & B[0];
+  wire pp02 = A[2] & B[0];
+  wire pp03 = A[3] & B[0];
+  wire pp04 = A[4] & B[0];
+  wire pp05 = A[5] & B[0];
+  wire pp06 = A[6] & B[0];
+  wire pp07 = A[7] & B[0];
+  
+  wire pp10 = A[0] & B[1];
+  wire pp11 = A[1] & B[1];
+  wire pp12 = A[2] & B[1];
+  wire pp13 = A[3] & B[1];
+  wire pp14 = A[4] & B[1];
+  wire pp15 = A[5] & B[1];
+  wire pp16 = A[6] & B[1];
+  wire pp17 = A[7] & B[1];
+  
+  wire pp20 = A[0] & B[2];
+  wire pp21 = A[1] & B[2];
+  wire pp22 = A[2] & B[2];
+  wire pp23 = A[3] & B[2];
+  wire pp24 = A[4] & B[2];
+  wire pp25 = A[5] & B[2];
+  wire pp26 = A[6] & B[2];
+  wire pp27 = A[7] & B[2];
+  
+  wire pp30 = A[0] & B[3];
+  wire pp31 = A[1] & B[3];
+  wire pp32 = A[2] & B[3];
+  wire pp33 = A[3] & B[3];
+  wire pp34 = A[4] & B[3];
+  wire pp35 = A[5] & B[3];
+  wire pp36 = A[6] & B[3];
+  wire pp37 = A[7] & B[3];
+  
+  wire pp40 = A[0] & B[4];
+  wire pp41 = A[1] & B[4];
+  wire pp42 = A[2] & B[4];
+  wire pp43 = A[3] & B[4];
+  wire pp44 = A[4] & B[4];
+  wire pp45 = A[5] & B[4];
+  wire pp46 = A[6] & B[4];
+  wire pp47 = A[7] & B[4];
+  
+  wire pp50 = A[0] & B[5];
+  wire pp51 = A[1] & B[5];
+  wire pp52 = A[2] & B[5];
+  wire pp53 = A[3] & B[5];
+  wire pp54 = A[4] & B[5];
+  wire pp55 = A[5] & B[5];
+  wire pp56 = A[6] & B[5];
+  wire pp57 = A[7] & B[5];
+  
+  wire pp60 = A[0] & B[6];
+  wire pp61 = A[1] & B[6];
+  wire pp62 = A[2] & B[6];
+  wire pp63 = A[3] & B[6];
+  wire pp64 = A[4] & B[6];
+  wire pp65 = A[5] & B[6];
+  wire pp66 = A[6] & B[6];
+  wire pp67 = A[7] & B[6];
+  
+  wire pp70 = A[0] & B[7];
+  wire pp71 = A[1] & B[7];
+  wire pp72 = A[2] & B[7];
+  wire pp73 = A[3] & B[7];
+  wire pp74 = A[4] & B[7];
+  wire pp75 = A[5] & B[7];
+  wire pp76 = A[6] & B[7];
+  wire pp77 = A[7] & B[7];
+  
+  
+  assign P[0] = pp00;
+  
+  wire s0, c0;
+  half_adder ha0(pp01, pp10, s0, c0);
+  assign P[1] = s0;
+  
+  wire s1, c1, s2, c2;
+  full_adder fa0(pp02, pp11, c0, s1, c1);
+  half_adder ha1(s1, pp20, s2, c2);
+  assign P[2] = s2;
+  
+  wire s3, c3, s4, c4, s5, c5;
+  full_adder fa1(pp03, pp12, c1, s3, c3);
+  full_adder fa2(pp21, s3, c2, s4, c4);
+  half_adder ha2(s4, pp30, s5, c5);
+  assign P[3] = s5;
+  
+  wire s6, c6, s7, c7, s8, c8, s9, c9;
+  full_adder fa3(pp04, pp13, c3, s6, c6);
+  full_adder fa4(pp22, s6, c4, s7, c7);
+  full_adder fa5(pp31, s7, c5, s8, c8);
+  half_adder ha3(s8, pp40, s9, c9);
+  assign P[4] = s9;
+  
+  wire s10, c10, s11, c11, s12, c12, s13, c13, s14, c14;
+  full_adder fa6(pp05, pp14, c6, s10, c10);
+  full_adder fa7(s10, c7, pp23, s11, c11);
+  full_adder fa8(s11, c8, pp32, s12, c12);
+  full_adder fa9(s12, c9, pp41, s13, c13);
+  half_adder ha4(s13, pp50, s14, c14);
+  assign P[5] = s14;
+  
+  wire s15, c15, s16, c16, s17, c17, s18, c18, s19, c19, s20, c20;
+  full_adder fa10(pp06, pp15, c10, s15, c15);
+  full_adder fa11(s15, pp24, c11, s16, c16);
+  full_adder fa12(s16, pp33, c12, s17, c17);
+  full_adder fa13(s17, pp42, c13, s18, c18);
+  full_adder fa14(s18, pp51, c14, s19, c19);
+  half_adder ha5(s19, pp60, s20, c20);
+  assign P[6] = s20;
+  
+  wire s21, c21, s22, c22, s23, c23, s24, c24, s25, c25, s26, c26, s27, c27;
+  full_adder fa16(pp07, pp16, c15, s21, c21);
+  full_adder fa(pp25, s21, c16, s22, c22);
+  full_adder fa17(pp34, s22, c17, s23, c23);
+  full_adder fa18(pp43, s23, c18, s24, c24);
+  full_adder fa19(pp52, s24, c19, s25, c25);
+  full_adder fa20(pp61, s25, c20, s26, c26);
+  half_adder ha6(pp70, s26, s27, c27);
+  assign P[7] = s27;
+  
+  wire s28, c28, s29, c29, s30, c30, s31, c31, s32, c32, s33, c33, s34, c34;
+  half_adder ha7(pp17, c21, s28, c28);
+  full_adder fa21(pp26, s28, c22, s29, c29);
+  full_adder fa22(pp35, s29, c23, s30, c30);
+  full_adder fa23(pp44, s30, c24, s31, c31);
+  full_adder fa24(pp53, s31, c25, s32, c32);
+  full_adder fa25(pp62, s32, c26, s33, c33);
+  full_adder fa26(pp71, s33, c27, s34, c34);
+  assign P[8] = s34;
+  
+  wire s35, c35, s36, c36, s37, c37, s38, c38, s39, c39, s40, c40;
+  full_adder fa27(pp27, c28, c29, s35, c35);
+  full_adder fa28(pp36, s35, c30, s36, c36);
+  full_adder fa29(pp45, s36, c31, s37, c37);
+  full_adder fa30(pp54, s37, c32, s38, c38);
+  full_adder fa31(pp63, s38, c33, s39, c39);
+  full_adder fa32(pp72, s39, c34, s40, c40);
+  assign P[9] = s40;
+  
+  wire s41, c41, s42, c42, s43, c43, s44, c44, s45, c45;
+  full_adder fa33(pp37, c35, c36, s41, c41);
+  full_adder fa34(pp46, s41, c37, s42, c42);
+  full_adder fa35(pp55, s42, c38, s43, c43);
+  full_adder fa36(pp64, s43, c39, s44, c44);
+  full_adder fa37(pp73, s44, c40, s45, c45);
+  assign P[10] = s45;
+  
+  wire s46, c46, s47, c47, s48, c48, s49, c49;
+  full_adder fa38(pp47, c41, c42, s46, c46);
+  full_adder fa39(pp56, s46, c43, s47, c47);
+  full_adder fa40(pp65, s47, c44, s48, c48);
+  full_adder fa41(pp74, s48, c45, s49, c49);
+  assign P[11] = s49;
+  
+  wire s50, c50, s51, c51, s52, c52;
+  full_adder fa42(pp57, c46, c47, s50, c50);
+  full_adder fa43(pp66, s50, c48, s51, c51);
+  full_adder fa44(pp75, s51, c49, s52, c52);
+  assign P[12] = s52;
+  
+  wire s53, c53, s54, c54;
+  full_adder fa45(pp67, c50, c51, s53, c53);
+  full_adder fa46(pp76, s53, c52, s54, c54);
+  assign P[13] = s54;
+  
+  wire s55, c55;
+  full_adder fa47(pp77, c53, c54, s55, c55);
+  assign P[14] = s55;
+  
+  assign P[15] = c55;
+  
+  
+endmodule
+  
+  
