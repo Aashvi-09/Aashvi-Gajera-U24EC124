@@ -1,0 +1,24 @@
+// Code your testbench here
+// or browse Examples
+module arrayMultiplier_testbench;
+  reg [7:0]A, B;
+  wire [15:0]P;
+  
+  arrayMultiplier_8X8 uut (
+    .A(A),
+    .B(B),
+    .P(P)
+  );
+  
+  initial begin
+    $dumpfile("arraymultipier.vcd");
+    $dumpvars(0, arrayMultiplier_testbench);
+    $display("    A       B       |      P      ");
+    $monitor("%b     %b    |    %b   ", A, B, P);
+    
+    A = 8'b00001111; B = 8'b00000111; #10;  //15 x 7
+    A = 8'b01010101; B = 8'b00101000; #10;  //85 x 40 = 3400
+    
+    $finish;
+  end
+endmodule
