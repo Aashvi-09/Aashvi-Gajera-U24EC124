@@ -1,0 +1,32 @@
+module full_adder (
+  input A, B, Cin,
+  output Sum, Cout
+);
+  assign Sum = A ^ B ^ Cin;
+  assign Cout = (A & B) | (Cin & (A ^ B));
+endmodule
+
+module carry_skip_adder_4bit (
+  input [3:0] A, B,
+  input Cin,
+  output [3:0] Sum,
+  output Cout
+);
+  wire [3:0] P;     
+  wire [3:0] C;    
+  wire skip;
+ 
+  full_adder FA0 (.A(A[0]), .B(B[0]), .Cin(Cin),    .Sum(Sum[0]), .Cout(C[0]));
+  full_adder FA1 (.A(A[1]), .B(B[1]), .Cin(C[0]),   .Sum(Sum[1]), .Cout(C[1]));
+  full_adder FA2 (.A(A[2]), .B(B[2]), .Cin(C[1]),   .Sum(Sum[2]), .Cout(C[2]));
+  full_adder FA3 (.A(A[3]), .B(B[3]), .Cin(C[2]),   .Sum(Sum[3]), .Cout(C[3]));
+ 
+  assign P[0] = A[0] ^ B[0];
+  assign P[1] = A[1] ^ B[1];
+  assign P[2] = A[2] ^ B[2];
+  assign P[3] = A[3] ^ B[3];
+
+  assign skip = P[0] & P[1] & P[2] & P[3];
+  assign Cout = skip ? Cin : C[3];
+
+endmodule
