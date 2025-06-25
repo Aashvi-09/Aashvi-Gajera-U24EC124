@@ -1,6 +1,6 @@
 // Code your testbench here
 // or browse Examples
-module carry_select_adder_32bit_tb;
+module carry_select_adder_32bit_testbench;
   reg  [31:0] A, B;
   reg         Cin;
   wire [31:0] Sum;
@@ -15,6 +15,8 @@ module carry_select_adder_32bit_tb;
   );
 
   initial begin
+    $dumpfile("CarrySelectAdder.vcd");
+    $dumpvars(0, carry_select_adder_32bit_testbench);
     $display("Time | A                          B                          Cin | Sum                        Cout");
     $monitor("%4t | %b %b  %b  | %b %b", $time, A, B, Cin, Sum, Cout);
 
