@@ -1,0 +1,67 @@
+// Code your design here
+
+module full_adder (
+  input A, B, Cin,
+  output Sum, Cout
+);
+  assign Sum = A ^ B ^ Cin;
+  assign Cout = (A & B) | (Cin & (A ^ B));
+endmodule
+
+
+module ripple_carry_adder_4bit (
+  input [3:0] A, B,
+  input Cin,
+  output [3:0] Sum,
+  output Cout
+);
+  wire [2:0] carry;
+
+  full_adder FA0 (A[0], B[0], Cin,       Sum[0], carry[0]);
+  full_adder FA1 (A[1], B[1], carry[0],  Sum[1], carry[1]);
+  full_adder FA2 (A[2], B[2], carry[1],  Sum[2], carry[2]);
+  full_adder FA3 (A[3], B[3], carry[2],  Sum[3], Cout);
+endmodule
+
+
+module carry_select_block_4bit (
+  input [3:0] A, B,
+  input Cin,
+  output [3:0] Sum,
+  output Cout
+);
+  wire [3:0] sum0, sum1;
+  wire cout0, cout1;
+
+  
+  ripple_carry_adder_4bit RCA0 (A, B, 1'b0, sum0, cout0);
+
+  
+  ripple_carry_adder_4bit RCA1 (A, B, 1'b1, sum1, cout1);
+
+  
+  assign Sum  = Cin ? sum1 : sum0;
+  assign Cout = Cin ? cout1 : cout0;
+endmodule
+
+
+module carry_select_adder_32bit (
+  input [31:0] A, B,
+  input Cin,
+  output [31:0] Sum,
+  output Cout
+);
+  wire [7:0] carry;
+
+  
+  ripple_carry_adder_4bit block0 (A[3:0], B[3:0], Cin, Sum[3:0], carry[0]);
+
+  
+  carry_select_block_4bit block1 (A[7:4],  B[7:4],  carry[0], Sum[7:4],  carry[1]);
+  carry_select_block_4bit block2 (A[11:8], B[11:8], carry[1], Sum[11:8], carry[2]);
+  carry_select_block_4bit block3 (A[15:12], B[15:12], carry[2], Sum[15:12], carry[3]);
+  carry_select_block_4bit block4 (A[19:16], B[19:16], carry[3], Sum[19:16], carry[4]);
+  carry_select_block_4bit block5 (A[23:20], B[23:20], carry[4], Sum[23:20], carry[5]);
+  carry_select_block_4bit block6 (A[27:24], B[27:24], carry[5], Sum[27:24], carry[6]);
+  carry_select_block_4bit block7 (A[31:28], B[31:28], carry[6], Sum[31:28], Cout);
+endmodule
