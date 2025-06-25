@@ -1,0 +1,47 @@
+// Code your testbench here
+// or browse Examples
+module carry_select_adder_32bit_tb;
+  reg  [31:0] A, B;
+  reg         Cin;
+  wire [31:0] Sum;
+  wire        Cout;
+
+  carry_select_adder_32bit uut (
+    .A(A),
+    .B(B),
+    .Cin(Cin),
+    .Sum(Sum),
+    .Cout(Cout)
+  );
+
+  initial begin
+    $display("Time | A                          B                          Cin | Sum                        Cout");
+    $monitor("%4t | %b %b  %b  | %b %b", $time, A, B, Cin, Sum, Cout);
+
+    //Simple addition
+    A = 32'd5; B = 32'd10; Cin = 0;
+    #10;
+
+    // With carry-in
+    A = 32'd1000; B = 32'd2500; Cin = 1;
+    #10;
+
+    // Maximum + 1
+    A = 32'hFFFFFFFF; B = 32'd1; Cin = 0;
+    #10;
+
+    // Random large numbers
+    A = 32'h12345678; B = 32'h87654321; Cin = 0;
+    #10;
+
+    // Zero + Zero
+    A = 32'd0; B = 32'd0; Cin = 0;
+    #10;
+
+    // All ones + All ones + carry
+    A = 32'hFFFFFFFF; B = 32'hFFFFFFFF; Cin = 1;
+    #10;
+
+    $finish;
+  end
+endmodule
