@@ -1,0 +1,29 @@
+module async_up_count_testbench;
+  reg clk, rst;
+  wire [2:0] Q; 
+  
+  async_up_counter uut (
+    .clk(clk),
+    .rst(rst),
+    .Q(Q)
+  );
+
+  
+  initial begin
+    clk = 0;
+    forever #5 clk = ~clk;
+  end
+
+  
+  initial begin
+    $dumpfile("AsynUpCounter.vcd");
+    $dumpvars(0, async_up_count_testbench);
+
+    $display("Time     Reset     Q");
+    $monitor("%0t    %b   %b", $time, rst, Q);
+
+    rst = 1;  #10; 
+    rst = 0;  #80; 
+    $finish;
+  end
+endmodule
